@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dynamic Product Filter </title>
+<link rel="stylesheet" href="style.CSS">
+
+<style>
+body {
+ font-family: Arial;
+ text-align: center;
+padding: 20px;
+    }
+
+select {
+      padding: 8px;
+      margin-bottom: 20px;
+      font-size: 16px;}
+
+.grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px; }
+
+.card {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      transition: 0.3s; }
+
+.card:hover {
+      transform: scale(1.05); }
+  
+  </style>
+</head> 
+
+<body>
+<h1>Dynamic Product Filter</h1>
+
+<select onchange="sortProducts(this.value)">
+<option value="default">Default</option>
+<option value="low">Price: Low to High</option>
+<option value="high">Price: High to Low</option>
+<option value="name">Name A–Z</option>
+</select>
+
+<div id="productGrid" class="grid"></div>
+
+  <script>
+    const products = [
+      { name: "DELL LAPTOP", price: 200000 },
+      { name: "NIKE Shoes", price: 50000 },
+      { name: "S25 ULTRA", price: 310000 },
+      { name: "APPLE Watch", price: 145500 },
+      { name: "JBL Headphones", price: 25090 } ];
+
+    function displayProducts(list) {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      list.forEach(p => {
+        grid.innerHTML += `
+          <div class="card">
+            <h3>${p.name}</h3>
+            <p>₹${p.price}</p>
+          </div>
+        `;
+      });
+    }
+
+    function sortProducts(type) {
+      let sorted = [...products];
+      if (type === "low") sorted.sort((a, b) => a.price - b.price);
+      if (type === "high") sorted.sort((a, b) => b.price - a.price);
+      if (type === "name") sorted.sort((a, b) => a.name.localeCompare(b.name));
+
+      displayProducts(sorted); }
+
+    displayProducts(products);
+  </script>
+
+</body>
+</html>

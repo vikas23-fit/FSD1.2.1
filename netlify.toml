@@ -8,7 +8,7 @@
 
 [[redirects]]
   from = "/EXP1.2.1"
-  to = ""/EXP1.1/1.2.1.html"
+  to = "/EXP1.1/1.2.1.html"
   status = 200
 
 [[redirects]]
